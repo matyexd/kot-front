@@ -1,71 +1,58 @@
-import { useState } from "react";
-import { Header, Group, Container, Burger, Box, Text } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { useStyles } from "./styles";
+import {
+  Header,
+  Group,
+  Box,
+  Text,
+  ActionIcon,
+  Menu,
+  Button,
+  Divider,
+} from "@mantine/core";
 import User from "../../assets/icons/user.svg";
-
-const links = [
-  {
-    id: 1,
-    label: "Главная",
-  },
-  {
-    id: 2,
-    label: "Войти",
-    icon: User,
-  },
-];
+import { Bell, Cloud, File, List, Logout } from "tabler-icons-react";
 
 export function LayoutHeader() {
-  const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
-  const { classes, cx } = useStyles();
-
-  const items = links.map((link) => (
-    <Box
-      key={link.label}
-      style={{ display: "flex", marginLeft: 30, cursor: "pointer" }}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(link.link);
-      }}
-    >
-      {link.icon && (
-        <img
-          src={link.icon}
-          alt=""
-          style={{ marginRight: 10 }}
-          width={18}
-          height={18}
-        />
-      )}
-      <Text
-        className={cx(classes.link, {
-          [classes.linkActive]: active === link.link,
-        })}
-      >
-        {link.label}
-      </Text>
-    </Box>
-  ));
-
   return (
-    <Header height={80}>
-      <Container className={classes.inner}>
-        <Burger
-          opened={opened}
-          onClick={toggle}
-          size="sm"
-          className={classes.burger}
-        />
-        <div></div>
+    <Box>
+      <Header height={60} px="md">
+        <Group position="apart" sx={{ height: "100%" }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Cloud size={48} strokeWidth={2} color={"#228be6"} />
+            <Text ml={10} size={"xl"} weight={500}>
+              KotCloud
+            </Text>
+          </div>
 
-        <Group spacing={0} className={classes.social} position="right" noWrap>
-          <Group className={classes.links} spacing={5}>
-            {items}
+          <Group>
+            <ActionIcon radius="xl" size={28}>
+              <Bell />
+            </ActionIcon>
+
+            <Menu width={250} shadow="md">
+              <Menu.Target>
+                <Button color={"blue"} variant="outline">
+                  Профиль
+                </Button>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item icon={<User size={20} />}>
+                  <Text pt={3}>Настройки пользователя</Text>
+                </Menu.Item>
+                <Menu.Item icon={<List size={20} />}>
+                  <Text pt={3}>Логи</Text>
+                </Menu.Item>
+                <Menu.Item icon={<File size={20} />}>
+                  <Text pt={3}>Файлы</Text>
+                </Menu.Item>
+                <Divider my="sm" style={{ marginTop: 5, marginBottom: 0 }} />
+                <Menu.Item icon={<Logout size={20} color={"red"} />}>
+                  <Text pt={3}>Выход</Text>
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
           </Group>
         </Group>
-      </Container>
-    </Header>
+      </Header>
+    </Box>
   );
 }

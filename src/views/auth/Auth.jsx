@@ -3,7 +3,6 @@ import { Switch, Route } from "react-router-dom";
 import { AppPath } from "../../routes/routes-enums";
 import { Registration } from "./Registration";
 import { Login } from "./Login";
-import { ResetPassword } from "./ResetPassword";
 
 const Auth = () => {
   return (
@@ -13,9 +12,6 @@ const Auth = () => {
       </Route>
       <Route path={AppPath.signUp} exact>
         <Registration />
-      </Route>
-      <Route path={AppPath.resetPassword} exact>
-        <ResetPassword />
       </Route>
     </Switch>
   );
