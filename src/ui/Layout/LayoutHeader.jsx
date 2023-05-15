@@ -8,8 +8,7 @@ import {
   Button,
   Divider,
 } from "@mantine/core";
-import User from "../../assets/icons/user.svg";
-import { Bell, Cloud, File, List, Logout } from "tabler-icons-react";
+import { Bell, Cloud, File, List, Logout, User } from "tabler-icons-react";
 
 export function LayoutHeader() {
   return (
