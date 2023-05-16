@@ -9,8 +9,12 @@ import {
   Divider,
 } from "@mantine/core";
 import { Bell, Cloud, File, List, Logout, User } from "tabler-icons-react";
+import { useHistory } from "react-router-dom";
+import { AppPath } from "../../routes/routes-enums";
 
 export function LayoutHeader() {
+  const history = useHistory();
+
   return (
     <Box>
       <Header height={60} px="md">
@@ -44,7 +48,10 @@ export function LayoutHeader() {
                   <Text pt={3}>Файлы</Text>
                 </Menu.Item>
                 <Divider my="sm" style={{ marginTop: 5, marginBottom: 0 }} />
-                <Menu.Item icon={<Logout size={20} color={"red"} />}>
+                <Menu.Item
+                  onClick={() => history.push(AppPath.signIn)}
+                  icon={<Logout size={20} color={"red"} />}
+                >
                   <Text pt={3}>Выход</Text>
                 </Menu.Item>
               </Menu.Dropdown>

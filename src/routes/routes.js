@@ -9,10 +9,12 @@ export const ROUTES = [
     path: AppPath.main,
     component: Main,
     protected: false,
+    exact: true,
   },
   {
     path: AppPath.authUrl,
     authNew: true,
+    exact: true,
     component: lazy(() =>
       import(/* webpackChunkName: "auth" */ "../views/auth")
     ),
@@ -20,6 +22,8 @@ export const ROUTES = [
 ];
 
 const RouteComponent = (route) => {
+  console.log(route);
+
   if (Array.isArray(route.path) && route.authNew) {
     return (
       <AuthLayout>
