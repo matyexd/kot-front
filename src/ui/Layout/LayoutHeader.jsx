@@ -9,11 +9,16 @@ import {
   Divider,
 } from "@mantine/core";
 import { Bell, Cloud, File, List, Logout, User } from "tabler-icons-react";
-import { useHistory } from "react-router-dom";
-import { AppPath } from "../../routes/routes-enums";
+import { useSelector } from "../../hooks/mobxStoreHooks/useSelector";
+import { observer } from "mobx-react";
 
-export function LayoutHeader() {
-  const history = useHistory();
+export const LayoutHeader = observer(() => {
+  const authStore = useSelector((store) => store.authStore);
+  const { logout } = authStore;
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <Box>
@@ -45,11 +50,14 @@ export function LayoutHeader() {
                   <Text pt={3}>Логи</Text>
                 </Menu.Item>
                 <Menu.Item icon={<File size={20} />}>
-                  <Text pt={3}>Файлы</Text>
+                  <Text pt={3}>Мои файлы</Text>
+                </Menu.Item>
+                <Menu.Item icon={<File size={20} />}>
+                  <Text pt={3}>Доступные файлы</Text>
                 </Menu.Item>
                 <Divider my="sm" style={{ marginTop: 5, marginBottom: 0 }} />
                 <Menu.Item
-                  onClick={() => history.push(AppPath.signIn)}
+                  onClick={() => handleLogout()}
                   icon={<Logout size={20} color={"red"} />}
                 >
                   <Text pt={3}>Выход</Text>
@@ -61,4 +69,4 @@ export function LayoutHeader() {
       </Header>
     </Box>
   );
-}
+});

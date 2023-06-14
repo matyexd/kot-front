@@ -1,17 +1,25 @@
-import { PasswordInput, TextInput, ThemeIcon, Button } from "@mantine/core";
-import { Link, useHistory } from "react-router-dom";
+import {
+  PasswordInput,
+  TextInput,
+  ThemeIcon,
+  Button,
+  Text,
+} from "@mantine/core";
+import { Link } from "react-router-dom";
 import { Mail } from "tabler-icons-react";
 import { useForm } from "@mantine/form";
 import { AppPath } from "../../../routes/routes-enums";
+import { useSelector } from "../../../hooks/mobxStoreHooks/useSelector";
+import { observer } from "mobx-react";
 
-const LoginForm = () => {
-  const history = useHistory();
+const LoginForm = observer(() => {
+  const authStore = useSelector((store) => store.authStore);
+  const { postLogin, inProcess, errors, setErrors } = authStore;
 
   const form = useForm({
     initialValues: {
       email: "",
       password: "",
-      rememberMe: false,
     },
 
     validate: {
@@ -24,12 +32,13 @@ const LoginForm = () => {
 
   const handleLogin = async (values, event) => {
     event.preventDefault();
-    history.push(AppPath.main);
+    postLogin({ email: values.email, password: values.password });
   };
 
   return (
     <form
       onSubmit={form.onSubmit((values, event) => handleLogin(values, event))}
+      onFocus={() => setErrors()}
     >
       <TextInput
         label={"Email"}
@@ -54,7 +63,7 @@ const LoginForm = () => {
         size="md"
       />
 
-      <Button type="submit" fullWidth mt={20} size="md">
+      <Button type="submit" fullWidth mt={20} size="md" loading={inProcess}>
         Войти
       </Button>
 
@@ -68,7 +77,12 @@ const LoginForm = () => {
       >
         Еще не зарегистрированы?
       </Button>
+      {errors.length > 0 && (
+        <Text mt={20} color={"red"}>
+          {errors}
+        </Text>
+      )}
     </form>
   );
-};
+});
 export default LoginForm;

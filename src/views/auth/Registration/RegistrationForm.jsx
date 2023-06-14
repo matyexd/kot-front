@@ -1,6 +1,6 @@
 import { PasswordInput, TextInput, ThemeIcon, Button } from "@mantine/core";
 import { Link, useHistory } from "react-router-dom";
-import { Mail } from "tabler-icons-react";
+import { Mail, User } from "tabler-icons-react";
 import { useForm } from "@mantine/form";
 import { AppPath } from "../../../routes/routes-enums";
 
@@ -11,7 +11,8 @@ const RegistrationForm = () => {
     initialValues: {
       email: "",
       password: "",
-      rememberMe: false,
+      repeatPassword: "",
+      username: "",
     },
 
     validate: {
@@ -29,6 +30,22 @@ const RegistrationForm = () => {
 
   return (
     <form onSubmit={form.onSubmit((values, event) => handleReg(values, event))}>
+      <TextInput
+        label={"Имя пользователя"}
+        {...form.getInputProps("username")}
+        size="md"
+        rightSection={
+          <ThemeIcon
+            variant="light"
+            size={"sm"}
+            style={{ backgroundColor: "transparent", color: "#495057" }}
+          >
+            <User />
+          </ThemeIcon>
+        }
+        mt={15}
+      />
+
       <TextInput
         label={"Email"}
         {...form.getInputProps("email")}
@@ -55,7 +72,7 @@ const RegistrationForm = () => {
       <PasswordInput
         mt={12}
         label={"Повторите пароль"}
-        {...form.getInputProps("password")}
+        {...form.getInputProps("repeatPassword")}
         size="md"
       />
 
