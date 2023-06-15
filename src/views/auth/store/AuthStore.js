@@ -81,6 +81,32 @@ class AuthStore {
     }
   };
 
+  postRegister = async ({ username, email, password, repeatPassword }) => {
+    const payload = {
+      username: username,
+      email: email,
+      password: password,
+      confirmPassword: repeatPassword,
+    };
+
+    try {
+      this.setErrors();
+      this.setInProcess(true);
+      const { data } = await AuthService.postRegister(payload);
+
+      await this.appendToken(data);
+    } catch (e) {
+      this.setErrors("Успользуются некорректные данные");
+
+      // this.addErrors(
+      //   "message",
+      //   "Что-то пошло не так... Попробуйте снова или обратитесь в поддержку"
+      // );
+    } finally {
+      this.setInProcess();
+    }
+  };
+
   logout = async (isReload = true) => {
     await this.getLogout();
     await TokenService.removeToken();

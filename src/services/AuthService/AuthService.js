@@ -9,6 +9,10 @@ class AuthService {
     return await authInstance.post(AuthUrl.postLogin, payload);
   };
 
+  static postRegister = async (payload) => {
+    return await authInstance.post(AuthUrl.register, payload);
+  };
+
   static getLogout = async () => {
     return await authInstance.post(AuthUrl.logout);
   };
