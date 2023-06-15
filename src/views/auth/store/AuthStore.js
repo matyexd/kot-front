@@ -81,10 +81,10 @@ class AuthStore {
     }
   };
 
-  logout = (isReload = true) => {
-    this.getLogout();
-    TokenService.removeToken();
-    this.history.push(AppPath.signIn);
+  logout = async (isReload = true) => {
+    await this.getLogout();
+    await TokenService.removeToken();
+    await this.history.push(AppPath.signIn);
     if (isReload) {
       Object.values(this.rootStore).forEach((store) => {
         store.reset && store.reset();
