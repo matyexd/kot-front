@@ -10,4 +10,5 @@ export const AppPath = Object.freeze({
 export const AuthUrl = Object.freeze({
   postLogin: "/auth/login",
   logout: "/auth/logOut",
+  register: "/auth/signUp",
 });

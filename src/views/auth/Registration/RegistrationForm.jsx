@@ -1,11 +1,20 @@
-import { PasswordInput, TextInput, ThemeIcon, Button } from "@mantine/core";
-import { Link, useHistory } from "react-router-dom";
+import {
+  PasswordInput,
+  TextInput,
+  ThemeIcon,
+  Button,
+  Text,
+} from "@mantine/core";
+import { Link } from "react-router-dom";
 import { Mail, User } from "tabler-icons-react";
 import { useForm } from "@mantine/form";
 import { AppPath } from "../../../routes/routes-enums";
+import { observer } from "mobx-react";
+import { useSelector } from "../../../hooks/mobxStoreHooks/useSelector";
 
-const RegistrationForm = () => {
-  const history = useHistory();
+const RegistrationForm = observer(() => {
+  const authStore = useSelector((store) => store.authStore);
+  const { postRegister, inProcess, errors, setErrors } = authStore;
 
   const form = useForm({
     initialValues: {
@@ -20,16 +29,26 @@ const RegistrationForm = () => {
         value.length > 0 ? null : "Email не должен быть пустым",
       password: (value) =>
         value.length > 0 ? null : "Пароль не должен быть пустым",
+      username: (value) =>
+        value.length > 0 ? null : "Имя пользователя не должно быть пустым",
     },
   });
 
   const handleReg = async (values, event) => {
     event.preventDefault();
-    history.push(AppPath.main);
+    postRegister({
+      username: values.username,
+      email: values.email,
+      password: values.password,
+      repeatPassword: values.repeatPassword,
+    });
   };
 
   return (
-    <form onSubmit={form.onSubmit((values, event) => handleReg(values, event))}>
+    <form
+      onSubmit={form.onSubmit((values, event) => handleReg(values, event))}
+      onFocus={() => setErrors()}
+    >
       <TextInput
         label={"Имя пользователя"}
         {...form.getInputProps("username")}
@@ -76,7 +95,7 @@ const RegistrationForm = () => {
         size="md"
       />
 
-      <Button type="submit" fullWidth mt={20} size="md">
+      <Button type="submit" fullWidth mt={20} size="md" loading={inProcess}>
         Зарегистрироваться
       </Button>
 
@@ -90,7 +109,13 @@ const RegistrationForm = () => {
       >
         Назад к входу
       </Button>
+
+      {errors.length > 0 && (
+        <Text mt={20} color={"red"}>
+          {errors}
+        </Text>
+      )}
     </form>
   );
-};
+});
 export default RegistrationForm;
