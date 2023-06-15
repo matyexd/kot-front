@@ -1,14 +1,15 @@
 import { lazy } from "react";
 import { AppPath } from "./routes-enums";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Main from "../views/main";
 import { AuthLayout } from "../layouts/AuthLayout";
+import { TokenService } from "../services/TokenService";
 
 export const ROUTES = [
   {
     path: AppPath.main,
     component: Main,
-    protected: false,
+    protected: true,
     exact: true,
   },
   {
@@ -22,7 +23,13 @@ export const ROUTES = [
 ];
 
 const RouteComponent = (route) => {
-  console.log(route);
+  if (route.protected && !TokenService.isTokenExists()) {
+    return <Redirect to={AppPath.signIn} />;
+  }
+
+  if (Array.isArray(route.path) && TokenService.isTokenExists()) {
+    return <Redirect to={AppPath.main} />;
+  }
 
   if (Array.isArray(route.path) && route.authNew) {
     return (
