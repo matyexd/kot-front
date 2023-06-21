@@ -5,6 +5,10 @@ import jwtDecode from "jwt-decode";
 import { AppPath } from "../../../routes/routes-enums";
 
 class AuthStore {
+  history = {};
+  inProcess = false;
+  errors = "";
+
   constructor(rootStore) {
     this.rootStore = rootStore;
     makeObservable(this, {
@@ -17,10 +21,6 @@ class AuthStore {
       setInProcess: action,
     });
   }
-
-  history = {};
-  inProcess = false;
-  errors = "";
 
   setHistory = (history) => {
     this.history = history;
@@ -121,7 +121,6 @@ class AuthStore {
   getLogout = async () => {
     try {
       const { data } = await AuthService.getLogout();
-      console.log(data);
     } catch (e) {
       console.log(e);
     }

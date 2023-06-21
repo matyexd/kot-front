@@ -30,7 +30,7 @@ export const LayoutHeader = observer(() => {
           <div style={{ display: "flex", alignItems: "center" }}>
             <Cloud size={48} strokeWidth={2} color={"#228be6"} />
             <Text ml={10} size={"xl"} weight={500}>
-              KotCloud
+              FileCloud
             </Text>
           </div>
 

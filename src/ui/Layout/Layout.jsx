@@ -8,6 +8,7 @@ const Layout = ({ children }) => {
       <AppShell
         header={<LayoutHeader />}
         padding={10}
+        pt={20}
         styles={() => ({ main: { backgroundColor: "#f8f8f8" } })}
       >
         <Container fluid={true}>

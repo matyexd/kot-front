@@ -16,4 +16,16 @@ export const AuthUrl = Object.freeze({
 
 export const FilesUrl = Object.freeze({
   getUsersDir: "/directories/getUsersDir",
+  postCreateDir: "/directories/create",
+  getFilesByParentDir: (id) => `directories/${id}/getContent`,
+  getFiles: "/files",
+  getFile: "/file",
+  getAvailableFiles: "/files/available",
+  postSetAccessFile: "/files/setAccess",
+  deleteAccessFile: "/files/removeAccess",
+  getDownloadFile: "/files/download",
+});
+
+export const UsersUrl = Object.freeze({
+  getUsers: "/users",
 });

@@ -5,14 +5,13 @@ import { TokenService } from "./TokenService";
 
 class Api {
   service;
+
   constructor(config) {
     let service = axiosLib.create(config);
     service.interceptors.response.use(this.handleSuccess, this.handleError);
     service.interceptors.request.use(
       (config) => {
-        console.log(config);
         const token = TokenService.getToken();
-        console.log(token);
         if (config.isAuth === false) {
           return config;
         }

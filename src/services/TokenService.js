@@ -17,6 +17,7 @@ export class TokenService {
   static isTokenExists() {
     return TokenService.storage.getItem("token") !== null;
   }
+
   static isTokenExistsSessionStorage() {
     return sessionStorage.getItem("token") !== null;
   }
@@ -35,7 +36,6 @@ export class TokenService {
    */
 
   static getToken() {
-    console.log(TokenService.storage.getItem("token"));
     return TokenService.storage.getItem("token") || "";
   }
 }

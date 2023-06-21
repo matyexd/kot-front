@@ -6,6 +6,7 @@ import {
   TextInput,
   ThemeIcon,
   Group,
+  Text,
 } from "@mantine/core";
 import LayoutBlock from "../../../ui/LayoutBlock/LayoutBlock";
 import { observer } from "mobx-react";
@@ -13,12 +14,22 @@ import { useSelector } from "../../../hooks/mobxStoreHooks/useSelector";
 import { useEffect } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
-import { Mail } from "tabler-icons-react";
+import { Mail, Home, ChevronRight } from "tabler-icons-react";
+import MyFilesBlock from "./MyFilesBlock";
 
 const MyFiles = observer(() => {
   const filesStore = useSelector((store) => store.filesStore);
-  const { postGetUsersDir } = filesStore;
+  const {
+    getUsersDir,
+    postCreateDir,
+    parentDir,
+    dirHistory,
+    chooseInHistory,
+    getUsersDirById,
+  } = filesStore;
   const [opened, { open, close }] = useDisclosure(false);
+
+  console.log(parentDir);
 
   const form = useForm({
     initialValues: {
@@ -32,19 +43,56 @@ const MyFiles = observer(() => {
 
   const handleCreateDir = (value, event) => {
     event.preventDefault();
+    postCreateDir(value.dirName);
+  };
+
+  const handleChooseInHistory = async (id) => {
+    await chooseInHistory(id);
+    await getUsersDirById(id);
   };
 
   useEffect(() => {
-    postGetUsersDir();
+    getUsersDir();
   }, []);
 
   return (
     <>
       <Box display={"flex"} sx={{ justifyContent: "space-between" }}>
-        <Title order={3}>Мои файлы</Title>
+        <Box display={"flex"} sx={{ alignItems: "center" }}>
+          {dirHistory.map((dir, index) =>
+            index === 0 ? (
+              <Title
+                order={3}
+                key={dir.id}
+                onClick={() =>
+                  parentDir.id !== dir.id && handleChooseInHistory(dir.id)
+                }
+                sx={{ cursor: "pointer", marginBottom: 3 }}
+              >
+                Мои файлы
+              </Title>
+            ) : (
+              <Box display={"flex"} sx={{ alignItems: "center" }} key={dir.id}>
+                <ChevronRight height={15} />
+                <Text
+                  size={16}
+                  key={dir.id}
+                  onClick={() =>
+                    parentDir.id !== dir.id && handleChooseInHistory(dir.id)
+                  }
+                  sx={{ cursor: "pointer" }}
+                >
+                  {dir.name}
+                </Text>
+              </Box>
+            )
+          )}
+        </Box>
         <Button onClick={open}>Создать папку</Button>
       </Box>
-      <LayoutBlock mt={10}>123</LayoutBlock>
+
+      <MyFilesBlock />
+
       <Modal
         opened={opened}
         onClose={close}
