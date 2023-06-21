@@ -1,6 +1,6 @@
 import { LayoutHeader } from "./LayoutHeader";
 import React from "react";
-import { Loader, Box, AppShell, Container } from "@mantine/core";
+import { Loader, AppShell, Container } from "@mantine/core";
 
 const Layout = ({ children }) => {
   return (

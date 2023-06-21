@@ -31,7 +31,7 @@ const MyFilesBlock = observer(() => {
       </Title>
       <LayoutBlock mt={10}>
         <Grid>
-          {dirs.map((item, index) => (
+          {dirs.map((item) => (
             <Grid.Col md={3} xs={6} key={item.id + "dir"}>
               <FileItem
                 isFile={false}
@@ -49,7 +49,7 @@ const MyFilesBlock = observer(() => {
       </Title>
       <LayoutBlock mt={10}>
         <Grid>
-          {files.map((item, index) => (
+          {files.map((item) => (
             <Grid.Col md={3} xs={6} key={item.id + "file"}>
               <FileItem isFile={true} name={item.name} />
             </Grid.Col>

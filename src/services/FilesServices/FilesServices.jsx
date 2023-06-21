@@ -1,7 +1,6 @@
 import { Api } from "../apiService";
-import { AuthUrl, FilesUrl } from "../../routes/routes-enums";
+import { FilesUrl } from "../../routes/routes-enums";
 import { baseConfig } from "../apiConfig";
-import { File } from "tabler-icons-react";
 
 const authInstance = new Api(baseConfig);
 

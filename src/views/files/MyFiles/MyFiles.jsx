@@ -4,17 +4,16 @@ import {
   Button,
   Modal,
   TextInput,
-  ThemeIcon,
   Group,
   Text,
 } from "@mantine/core";
-import LayoutBlock from "../../../ui/LayoutBlock/LayoutBlock";
+
 import { observer } from "mobx-react";
 import { useSelector } from "../../../hooks/mobxStoreHooks/useSelector";
 import { useEffect } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
-import { Mail, Home, ChevronRight } from "tabler-icons-react";
+import { ChevronRight } from "tabler-icons-react";
 import MyFilesBlock from "./MyFilesBlock";
 
 const MyFiles = observer(() => {
