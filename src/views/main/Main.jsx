@@ -1,7 +1,7 @@
 import Layout from "../../ui/Layout";
 
 const Main = () => {
-  return <Layout>123</Layout>;
+  return <>123</>;
 };
 
 export default Main;

@@ -4,6 +4,9 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Main from "../views/main";
 import { AuthLayout } from "../layouts/AuthLayout";
 import { TokenService } from "../services/TokenService";
+import { Loader } from "@mantine/core";
+import React from "react";
+import Layout from "../ui/Layout";
 
 export const ROUTES = [
   {
@@ -19,6 +22,14 @@ export const ROUTES = [
     component: lazy(() =>
       import(/* webpackChunkName: "auth" */ "../views/auth")
     ),
+  },
+  {
+    path: AppPath.files,
+    component: lazy(() =>
+      import(/* webpackChunkName: "my_files" */ "../views/files/MyFiles")
+    ),
+    protected: true,
+    exact: true,
   },
 ];
 
@@ -49,7 +60,11 @@ const RouteComponent = (route) => {
     <Route
       path={route.path}
       exact={route.exact}
-      render={(props) => <RouteCmp {...props} />}
+      render={(props) => (
+        <Layout>
+          <RouteCmp {...props} />
+        </Layout>
+      )}
     />
   );
 };

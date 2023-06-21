@@ -21,7 +21,7 @@ export const Registration = () => {
             >
               <Cloud size={150} strokeWidth={2} color={"#228be6"} />
               <Text ml={10} size={50} weight={500}>
-                KotCloud
+                FileCloud
               </Text>
             </div>
           </Box>
