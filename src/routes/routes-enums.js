@@ -8,6 +8,7 @@ export const AppPath = Object.freeze({
   files: "/files/",
   accessFiles: "/access_files/",
   logs: "/logs/",
+  userSettings: "/user_settings/",
 });
 
 export const AuthUrl = Object.freeze({

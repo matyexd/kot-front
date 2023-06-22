@@ -46,7 +46,10 @@ export const LayoutHeader = observer(() => {
                 </Button>
               </Menu.Target>
               <Menu.Dropdown>
-                <Menu.Item icon={<User size={20} />}>
+                <Menu.Item
+                  icon={<User size={20} />}
+                  onClick={() => history.push(AppPath.userSettings)}
+                >
                   <Text pt={3}>Настройки пользователя</Text>
                 </Menu.Item>
                 <Menu.Item

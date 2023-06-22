@@ -34,7 +34,9 @@ export const ROUTES = [
   {
     path: AppPath.accessFiles,
     component: lazy(() =>
-      import(/* webpackChunkName: "my_files" */ "../views/files/AccessFiles")
+      import(
+        /* webpackChunkName: "access_files" */ "../views/files/AccessFiles"
+      )
     ),
     protected: true,
     exact: true,
@@ -43,7 +45,16 @@ export const ROUTES = [
   {
     path: AppPath.logs,
     component: lazy(() =>
-      import(/* webpackChunkName: "my_files" */ "../views/logs")
+      import(/* webpackChunkName: "logs" */ "../views/logs")
+    ),
+    protected: true,
+    exact: true,
+  },
+
+  {
+    path: AppPath.userSettings,
+    component: lazy(() =>
+      import(/* webpackChunkName: "user_settings" */ "../views/userSettings")
     ),
     protected: true,
     exact: true,
