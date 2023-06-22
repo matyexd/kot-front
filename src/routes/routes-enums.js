@@ -6,6 +6,9 @@ export const AppPath = Object.freeze({
   signIn: "/sign_in/",
   signUp: "/sign_up/",
   files: "/files/",
+  accessFiles: "/access_files/",
+  logs: "/logs/",
+  userSettings: "/user_settings/",
 });
 
 export const AuthUrl = Object.freeze({
@@ -24,6 +27,10 @@ export const FilesUrl = Object.freeze({
   postSetAccessFile: "/files/setAccess",
   deleteAccessFile: "/files/removeAccess",
   getDownloadFile: "/files/download",
+});
+
+export const LogsUrl = Object.freeze({
+  getLogs: "/logs",
 });
 
 export const UsersUrl = Object.freeze({

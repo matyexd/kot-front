@@ -46,10 +46,16 @@ export const LayoutHeader = observer(() => {
                 </Button>
               </Menu.Target>
               <Menu.Dropdown>
-                <Menu.Item icon={<User size={20} />}>
+                <Menu.Item
+                  icon={<User size={20} />}
+                  onClick={() => history.push(AppPath.userSettings)}
+                >
                   <Text pt={3}>Настройки пользователя</Text>
                 </Menu.Item>
-                <Menu.Item icon={<List size={20} />}>
+                <Menu.Item
+                  icon={<List size={20} />}
+                  onClick={() => history.push(AppPath.logs)}
+                >
                   <Text pt={3}>Логи</Text>
                 </Menu.Item>
                 <Menu.Item
@@ -58,7 +64,10 @@ export const LayoutHeader = observer(() => {
                 >
                   <Text pt={3}>Мои файлы</Text>
                 </Menu.Item>
-                <Menu.Item icon={<File size={20} />}>
+                <Menu.Item
+                  icon={<File size={20} />}
+                  onClick={() => history.push(AppPath.accessFiles)}
+                >
                   <Text pt={3}>Доступные файлы</Text>
                 </Menu.Item>
                 <Divider my="sm" style={{ marginTop: 5, marginBottom: 0 }} />

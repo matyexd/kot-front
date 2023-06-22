@@ -75,6 +75,15 @@ class FilesStore {
     }
   };
 
+  getAvailableFiles = async () => {
+    try {
+      const { data } = await FileServices.getAvailableFiles();
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   postCreateDir = async (dirName) => {
     let payload = {
       dirName,

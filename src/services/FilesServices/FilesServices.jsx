@@ -13,6 +13,10 @@ class FileServices {
     return await authInstance.get(FilesUrl.getFilesByParentDir(dirId));
   };
 
+  static getAvailableFiles = async () => {
+    return await authInstance.get(FilesUrl.getAvailableFiles);
+  };
+
   static postCreateDir = async (dirId, query) => {
     return await authInstance.post(FilesUrl.getFilesByParentDir(dirId), query);
   };
