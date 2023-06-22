@@ -31,6 +31,23 @@ export const ROUTES = [
     protected: true,
     exact: true,
   },
+  {
+    path: AppPath.accessFiles,
+    component: lazy(() =>
+      import(/* webpackChunkName: "my_files" */ "../views/files/AccessFiles")
+    ),
+    protected: true,
+    exact: true,
+  },
+
+  {
+    path: AppPath.logs,
+    component: lazy(() =>
+      import(/* webpackChunkName: "my_files" */ "../views/logs")
+    ),
+    protected: true,
+    exact: true,
+  },
 ];
 
 const RouteComponent = (route) => {
